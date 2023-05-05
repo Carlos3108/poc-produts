@@ -1,6 +1,5 @@
 package com.product.pocproducts.service;
 
-import com.azdevelopment.webproject.dto.UserDTO;
 import com.product.pocproducts.dto.ProductCreateDTO;
 import com.product.pocproducts.dto.ProductDTO;
 import org.springframework.http.ResponseEntity;
