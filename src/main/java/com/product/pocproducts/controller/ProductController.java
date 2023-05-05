@@ -1,5 +1,6 @@
 package com.product.pocproducts.controller;
 
+import com.product.pocproducts.dto.ProductCreateDTO;
 import com.product.pocproducts.dto.ProductDTO;
 import com.product.pocproducts.service.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,7 +60,7 @@ public class ProductController {
                             schema = @Schema(implementation = ProductDTO.class)
                     )})})
     @PostMapping("/create")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO product){
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductCreateDTO product){
         return service.create(product);
     }
 

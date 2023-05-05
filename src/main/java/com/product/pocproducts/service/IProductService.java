@@ -1,6 +1,7 @@
 package com.product.pocproducts.service;
 
 import com.azdevelopment.webproject.dto.UserDTO;
+import com.product.pocproducts.dto.ProductCreateDTO;
 import com.product.pocproducts.dto.ProductDTO;
 import org.springframework.http.ResponseEntity;
 
@@ -11,7 +12,7 @@ public interface IProductService {
 
     ProductDTO findByID(String id);
 
-    ResponseEntity<ProductDTO> create(ProductDTO product);
+    ResponseEntity<ProductDTO> create(ProductCreateDTO product);
 
     String delete(String id);
 
