@@ -1,6 +1,5 @@
 package com.product.pocproducts.controller;
 
-import com.azdevelopment.webproject.dto.UserDTO;
 import com.product.pocproducts.dto.ProductDTO;
 import com.product.pocproducts.service.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,8 +31,8 @@ public class ProductController {
                             array = @ArraySchema(schema = @Schema(implementation = ProductDTO.class))
                     )})})
     @GetMapping("/all")
-    public List<ProductDTO> getAll() {
-        return service.getAll();
+    public List<ProductDTO> findAll() {
+        return service.findAll();
     }
 
     @Operation(summary = "Pesquisa de Produto por ID",
@@ -74,8 +73,8 @@ public class ProductController {
                             schema = @Schema(implementation = ProductDTO.class)
                     )})})
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable("id") String id)  {
-        service.delete(id);
+    public ResponseEntity<String> delete(@PathVariable("id") String id)  {
+       return ResponseEntity.ok(service.delete(id));
     }
 
     @Operation(summary = "Atualizar Produto",
