@@ -46,7 +46,7 @@ public class ProductController {
                             schema = @Schema(implementation = ProductDTO.class)
                     )})})
     @GetMapping("/{id}")
-    public ProductDTO findByID(@PathVariable String id) {
+    public ProductDTO findByID(@PathVariable Long id) {
         return service.findByID(id);
     }
 
@@ -74,7 +74,7 @@ public class ProductController {
                             schema = @Schema(implementation = ProductDTO.class)
                     )})})
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") String id)  {
+    public ResponseEntity<String> delete(@PathVariable("id") Long id)  {
        return ResponseEntity.ok(service.delete(id));
     }
 

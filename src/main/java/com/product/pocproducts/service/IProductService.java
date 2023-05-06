@@ -9,11 +9,11 @@ import java.util.List;
 public interface IProductService {
     List<ProductDTO> findAll();
 
-    ProductDTO findByID(String id);
+    ProductDTO findByID(Long id);
 
     ResponseEntity<ProductDTO> create(ProductCreateDTO product);
 
-    String delete(String id);
+    String delete(Long id);
 
     ProductDTO update(ProductDTO product);
 }
