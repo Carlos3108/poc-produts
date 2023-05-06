@@ -11,6 +11,8 @@ public interface IProductService {
 
     ProductDTO findByID(Long id);
 
+    ProductDTO findByName(String name);
+
     ResponseEntity<ProductDTO> create(ProductCreateDTO product);
 
     String delete(Long id);

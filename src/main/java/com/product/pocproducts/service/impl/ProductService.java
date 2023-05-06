@@ -8,16 +8,20 @@ import com.product.pocproducts.mapper.ProductMapper;
 import com.product.pocproducts.model.Product;
 import com.product.pocproducts.repository.ProductRepository;
 import com.product.pocproducts.service.IProductService;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class ProductService implements IProductService {
 
@@ -26,29 +30,42 @@ public class ProductService implements IProductService {
     private ProductMapper mapper;
 
     @Override
+    @SneakyThrows
     public List<ProductDTO> findAll() {
-        List<Product> products = this.repository.findAll();
+        List<Product> products = repository.findAll();
+        log.info("Products " + products);
         return mapper.from(products);
     }
 
     @Override
     @SneakyThrows
     public ProductDTO findByID(Long id) {
-        Product product = this.repository
-                .findById(id)
+        Product product = repository.findById(id)
                 .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
         return mapper.from(product);
     }
 
     @Override
     @SneakyThrows
-    public ResponseEntity<ProductDTO> create(ProductCreateDTO product) {
-        Product productEntity = mapper.to(product);
-        Product save = repository.save(productEntity);
-        return ResponseEntity.ok(mapper.from(save));
+    public ProductDTO findByName(String name){
+        Product product = repository.findByName(name)
+                .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
+        return mapper.from(product);
     }
 
+    @Override
     @Transactional
+    @SneakyThrows
+    public ResponseEntity<ProductDTO> create(ProductCreateDTO product) {
+        checkValue(product.getName());
+        Optional<Product> productExists = repository.findByName(product.getName());
+        if (productExists.isEmpty()) {
+            Product save = repository.save(mapper.to(product));
+            return ResponseEntity.created(URI.create("/product/create")).body(mapper.from(save));
+        }
+        return ResponseEntity.ok(mapper.from(productExists.get()));
+    }
+
     @SneakyThrows
     public String delete(Long id) {
         repository.findById(id)
@@ -67,5 +84,13 @@ public class ProductService implements IProductService {
         Product productSaved = Optional.of(repository.save(product))
                 .orElseThrow(() -> new PocProductException(PocProductError.ERROR_UPDATE));
         return mapper.from(productSaved);
+    }
+
+    @SneakyThrows
+    private static void checkValue(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            log.error("Value Invalid " + value);
+            throw new PocProductException(PocProductError.VALUE_IS_INVALID);
+        }
     }
 }
