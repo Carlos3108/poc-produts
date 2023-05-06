@@ -2,6 +2,7 @@ services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
+      SA_USER: "sa"
       SA_PASSWORD: "SqlServer2022!"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
