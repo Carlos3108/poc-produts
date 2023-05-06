@@ -14,7 +14,6 @@ import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +36,7 @@ public class ProductService implements IProductService {
     public ProductDTO findByID(Long id) {
         Product product = this.repository
                 .findById(id)
-                .orElseThrow(() -> new PocProductException(PocProductError.USER_NOT_FOUND));
+                .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
         return mapper.from(product);
     }
 
@@ -53,7 +52,7 @@ public class ProductService implements IProductService {
     @SneakyThrows
     public String delete(Long id) {
         repository.findById(id)
-                .orElseThrow(() -> new PocProductException(PocProductError.USER_NOT_FOUND));
+                .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
         repository.deleteById(id);
         return HttpStatus.OK.toString();
     }
@@ -63,7 +62,7 @@ public class ProductService implements IProductService {
     @Transactional
     public ProductDTO update(ProductDTO productDTO) {
         Product oldProduct = repository.findById(productDTO.getId())
-                .orElseThrow(() -> new PocProductException(PocProductError.USER_NOT_FOUND));
+                .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
         Product product = mapper.fromUpdate(productDTO,oldProduct);
         Product productSaved = Optional.of(repository.save(product))
                 .orElseThrow(() -> new PocProductException(PocProductError.ERROR_UPDATE));
