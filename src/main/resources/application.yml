@@ -1,9 +1,34 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /poc-products/v1
+
 spring:
   datasource:
     url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=poc-products-db
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: C210818s!
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.SQLServerDialect
+    show-sql: true
     hibernate:
       ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.SQLServerDialect
+logging:
+  level:
+    project:
+      user:
+        UserClient: DEBUG
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
