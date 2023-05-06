@@ -14,7 +14,7 @@ import java.util.Date;
 public class ProductCreateDTO {
 
     private String name;
-    private Date validity;
+    private String validity;
     private Integer qtt;
     private BigDecimal value;
 

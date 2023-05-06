@@ -3,7 +3,6 @@ package com.product.pocproducts.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Builder
 @Entity
@@ -21,7 +20,7 @@ public class Product {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private Date validity;
+    private String validity;
     @Column(nullable = false)
     private Integer qtt;
     @Column(nullable = false)

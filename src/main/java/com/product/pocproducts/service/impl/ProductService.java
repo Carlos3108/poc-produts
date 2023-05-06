@@ -10,7 +10,6 @@ import com.product.pocproducts.repository.ProductRepository;
 import com.product.pocproducts.service.IProductService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 @AllArgsConstructor
 public class ProductService implements IProductService {
 
@@ -33,7 +31,6 @@ public class ProductService implements IProductService {
     @SneakyThrows
     public List<ProductDTO> findAll() {
         List<Product> products = repository.findAll();
-        log.info("Products " + products);
         return mapper.from(products);
     }
 
@@ -68,8 +65,7 @@ public class ProductService implements IProductService {
 
     @SneakyThrows
     public String delete(Long id) {
-        repository.findById(id)
-                .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
+        findByID(id);
         repository.deleteById(id);
         return HttpStatus.OK.toString();
     }
@@ -78,8 +74,7 @@ public class ProductService implements IProductService {
     @SneakyThrows
     @Transactional
     public ProductDTO update(ProductDTO productDTO) {
-        Product oldProduct = repository.findById(productDTO.getId())
-                .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
+        ProductDTO oldProduct = findByID(productDTO.getId());
         Product product = mapper.fromUpdate(productDTO,oldProduct);
         Product productSaved = Optional.of(repository.save(product))
                 .orElseThrow(() -> new PocProductException(PocProductError.ERROR_UPDATE));
@@ -89,7 +84,6 @@ public class ProductService implements IProductService {
     @SneakyThrows
     private static void checkValue(String value) {
         if (value == null || value.trim().isEmpty()) {
-            log.error("Value Invalid " + value);
             throw new PocProductException(PocProductError.VALUE_IS_INVALID);
         }
     }

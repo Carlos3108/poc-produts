@@ -36,6 +36,19 @@ public class ProductController {
         return service.findAll();
     }
 
+    @Operation(summary = "Pesquisa de Produto por Nome",
+            description = "Pesquisa de Produto por Nome",
+            tags = {"Pesquisa de Produto por Nome"})
+    @ApiResponse(responseCode = "200", description = "Pesquisa de Produto por Nome")
+    @ApiResponses(value = {
+            @ApiResponse(content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProductDTO.class)
+                    )})})
+    @GetMapping
+    public ProductDTO findByName(@RequestParam String name) {
+        return service.findByName(name);
+    }
     @Operation(summary = "Pesquisa de Produto por ID",
             description = "Pesquisa de Produto por ID",
             tags = {"Pesquisa de Produto por ID"})

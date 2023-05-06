@@ -40,22 +40,16 @@ public class ProductMapper {
                 .build();
     }
 
-    public Product fromUpdate(ProductDTO productDTO ,Product product) {
+    public Product fromUpdate(ProductDTO newProductDTO, ProductDTO oldProduct) {
         return Product.builder()
-                .id(product.getId())
-                .name(isDiferent(productDTO.getName(), product.getName()))
-                .validity(isDiferentDate(productDTO.getValidity(), product.getValidity()))
-                .qtt(isDiferentInt(productDTO.getQtt(), product.getQtt()))
-                .value(isDiferentBig(productDTO.getValue(), product.getValue()))
+                .id(oldProduct.getId())
+                .name(isDiferent(newProductDTO.getName(), oldProduct.getName()))
+                .validity(isDiferent(newProductDTO.getValidity(), oldProduct.getValidity()))
+                .qtt(isDiferentInt(newProductDTO.getQtt(), oldProduct.getQtt()))
+                .value(isDiferentBig(newProductDTO.getValue(), oldProduct.getValue()))
                 .build();
     }
 
-    private Date isDiferentDate(Date newValidity, Date oldValidity) {
-        if (newValidity != null && !newValidity.equals(oldValidity))
-            return newValidity;
-        else
-            return oldValidity;
-    }
     private Integer isDiferentInt(Integer newQtt, Integer oldQtt) {
         if (newQtt != null && !newQtt.equals(oldQtt))
             return newQtt;
