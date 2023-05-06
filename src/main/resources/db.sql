@@ -1,4 +1,4 @@
-CREATE DATABASE poc-products-db
+CREATE DATABASE dbproducts
 GO
 
 USE dbproducts

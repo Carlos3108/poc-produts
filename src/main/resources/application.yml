@@ -8,7 +8,7 @@ spring:
     url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=dbproducts
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
-    password: C210818s!
+    password: SqlServer2022!
   jpa:
     show-sql: true
     hibernate:
