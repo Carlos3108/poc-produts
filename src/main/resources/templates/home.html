@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" th:href="@{../static/css/home.css}">
     <title>Home Produtos</title>
 </head>
 <body>
@@ -25,15 +25,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-th-each="product : ${products}">
-            <td data-th-text="${product.id}"></td>
-            <td data-th-text="${product.name}"></td>
-            <td data-th-text="${product.validity}"></td>
-            <td data-th-text="${product.value}"></td>
-            <td data-th-text="${product.qtt}"></td>
+        <tr data-th-each="product : ${products}" th:object="${product}">
+            <td data-th-text="${product.id}" th:value="${product.id}"></td>
+            <td data-th-text="${product.name}" th:value="${product.name}"></td>
+            <td data-th-text="${product.validity}" th:value="${product.validity}"></td>
+            <td data-th-text="${product.value}" th:value="${product.value}"></td>
+            <td data-th-text="${product.qtt}" th:value="${product.qtt}"></td>
             <td>
                 <button type="button" class="btn btn-danger">Apagar</button>
-                <button type="button" class="btn btn-warning">Atualizar</button>
+                <a class="btn btn-warning" th:href="@{'/update/' + ${product.id}}">
+                    Atualizar
+                </a>
             </td>
         </tr>
         </tbody>

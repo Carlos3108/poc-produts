@@ -13,27 +13,32 @@
   Atualizar Produto
 </h1>
 <div class="formulario">
-  <form>
+  <form th:object="${product}">
     <fieldset>
       <div class="mb-3">
         <label class="form-label">Código</label>
-        <input type="text" disabled name="id" value="3" class="form-control" placeholder="Codigo">
+        <input type="text" disabled name="id" class="form-control"
+               placeholder="Codigo" th:value="${product.id}">
       </div>
       <div class="mb-3">
         <label class="form-label">Nome</label>
-        <input type="text" name="name" class="form-control" placeholder="Nome">
+        <input type="text" name="name" class="form-control"
+               placeholder="Nome" th:value="${product.name}">
       </div>
       <div class="mb-3">
         <label class="form-label">Validade</label>
-        <input type="date" name="validity" class="form-control" placeholder="Validade">
+        <input type="text" name="validity" class="form-control"
+               placeholder="Validade" th:value="${product.validity}">
       </div>
       <div class="mb-3">
         <label class="form-label">Quantidade</label>
-        <input type="text" name="qtt" class="form-control" placeholder="Quantidade">
+        <input type="text" name="qtt" class="form-control"
+               placeholder="Quantidade" th:value="${product.value}">
       </div>
       <div class="mb-3">
         <label class="form-label">Valor</label>
-        <input type="number" name="value" class="form-control" placeholder="Valor">
+        <input type="number" name="value" class="form-control"
+               placeholder="Valor" th:value="${product.qtt}">
       </div>
 
       <button type="submit" class="btn btn-primary">Atualizar</button>
