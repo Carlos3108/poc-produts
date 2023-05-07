@@ -18,7 +18,7 @@ public class ThymeleafController {
     @GetMapping("/all")
     public ModelAndView listAll() {
         ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("listProduct", iProductService.findAll());
+        modelAndView.addObject("products", iProductService.findAll());
         return modelAndView;
     }
 }
