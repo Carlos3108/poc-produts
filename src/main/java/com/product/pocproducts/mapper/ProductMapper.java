@@ -9,6 +9,7 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ public class ProductMapper {
         return Product.builder()
                 .id(oldProduct.getId())
                 .name(isDiferent(newProductDTO.getName(), oldProduct.getName()))
-                .validity(isDiferent(newProductDTO.getValidity(), oldProduct.getValidity()))
+                .validity(formatDate(isDiferent(newProductDTO.getValidity(), oldProduct.getValidity())))
                 .qtt(isDiferentInt(newProductDTO.getQtt(), oldProduct.getQtt()))
                 .value(isDiferentBig(newProductDTO.getValue(), oldProduct.getValue()))
                 .build();
@@ -64,7 +65,6 @@ public class ProductMapper {
             return oldValue;
     }
 
-
     private static String isDiferent(String newValue, String oldValue) {
         if (newValue != null && !newValue.equals(oldValue))
             return isValid(newValue);
@@ -82,9 +82,15 @@ public class ProductMapper {
     public Product to(ProductCreateDTO productCreateDTO) {
         return Product.builder()
                 .name(productCreateDTO.getName())
-                .validity(productCreateDTO.getValidity())
+                .validity(formatDate( productCreateDTO.getValidity() ))
                 .qtt(productCreateDTO.getQtt())
                 .value(productCreateDTO.getValue())
                 .build();
+    }
+
+    private static String formatDate(String date) {
+        Date formatDate = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(formatDate);
     }
 }
