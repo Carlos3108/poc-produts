@@ -1,14 +1,12 @@
 package com.product.pocproducts.controller;
 
+import com.product.pocproducts.dto.ProductCreateDTO;
 import com.product.pocproducts.dto.ProductDTO;
 import com.product.pocproducts.service.IProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
@@ -23,9 +21,15 @@ public class ThymeleafController {
         modelAndView.addObject("products", iProductService.findAll());
         return modelAndView;
     }
-    @GetMapping("form-create")
-    public String formCreate(){
-        return "form-create";
+    @GetMapping("/create-form")
+    public ModelAndView createForm() {
+        return new ModelAndView("create-form");
+    }
+
+    @PostMapping("/create-th")
+    public String createTh(ProductCreateDTO productCreateDTO) {
+        iProductService.create(productCreateDTO);
+        return "redirect:/home";
     }
 
     @GetMapping("/form-update/{id}")
