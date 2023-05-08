@@ -17,7 +17,9 @@
     <fieldset>
       <div class="mb-3">
         <label class="form-label">Código</label>
-        <input type="text" name="id" class="form-control"
+        <input type="text" disabled name="id" class="form-control"
+               placeholder="Codigo" th:value="${product.id}">
+        <input type="hidden"  name="id" class="form-control"
                placeholder="Codigo" th:value="${product.id}">
       </div>
       <div class="mb-3">
@@ -33,12 +35,12 @@
       <div class="mb-3">
         <label class="form-label">Quantidade</label>
         <input type="text" name="qtt" class="form-control"
-               placeholder="Quantidade" th:value="${product.value}">
+               placeholder="Quantidade" th:value="${product.qtt}">
       </div>
       <div class="mb-3">
         <label class="form-label">Valor</label>
         <input type="text" name="value" class="form-control"
-               placeholder="text" th:value="${product.qtt}">
+               placeholder="Valor" th:value="${product.value}">
       </div>
 
       <button type="submit" class="btn btn-primary">Atualizar</button>

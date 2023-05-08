@@ -40,15 +40,15 @@ public class ThymeleafController {
                                @RequestParam String name,
                                @RequestParam String validity,
                                @RequestParam Integer qtt,
-                               @RequestParam BigDecimal value) {
+                               @RequestParam String value) {
         ProductDTO productDTO = ProductDTO.builder()
                 .id(id)
                 .name(name)
                 .validity(validity)
                 .qtt(qtt)
-                .value(value)
+                .value(new BigDecimal(value))
                 .build();
         iProductService.update(productDTO);
-        return "home";
+        return "redirect:/home";
     }
 }
