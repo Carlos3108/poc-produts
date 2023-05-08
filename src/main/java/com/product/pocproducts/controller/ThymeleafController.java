@@ -35,6 +35,12 @@ public class ThymeleafController {
         return modelAndView;
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        iProductService.delete(id);
+        return "redirect:/home";
+    }
+
     @GetMapping("/update")
     public String update(@RequestParam Long id,
                                @RequestParam String name,

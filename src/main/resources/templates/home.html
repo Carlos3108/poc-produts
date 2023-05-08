@@ -32,7 +32,7 @@
             <td data-th-text="${product.qtt}" th:value="${product.qtt}"></td>
             <td data-th-text="${product.value}" th:value="${product.value}"></td>
             <td>
-                <button type="button" class="btn btn-danger">Apagar</button>
+                <a class="btn btn-danger" th:href="@{'/delete/' + ${product.id}}">Apagar</a>
                 <a class="btn btn-warning" th:href="@{'/form-update/' + ${product.id}}">
                     Atualizar
                 </a>
