@@ -5,8 +5,10 @@ import com.product.pocproducts.dto.ProductDTO;
 import com.product.pocproducts.service.IProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
@@ -15,12 +17,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ThymeleafController {
     private IProductService iProductService;
+
     @GetMapping("/home")
     public ModelAndView listAll() {
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("products", iProductService.findAll());
         return modelAndView;
     }
+
     @GetMapping("/create-form")
     public ModelAndView createForm() {
         return new ModelAndView("create-form");
@@ -33,7 +37,7 @@ public class ThymeleafController {
     }
 
     @GetMapping("/form-update/{id}")
-    public ModelAndView formUpdate(@PathVariable("id") Long id){
+    public ModelAndView formUpdate(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("update");
         modelAndView.addObject("product", iProductService.findByID(id));
         return modelAndView;
@@ -47,10 +51,10 @@ public class ThymeleafController {
 
     @GetMapping("/update")
     public String update(@RequestParam Long id,
-                               @RequestParam String name,
-                               @RequestParam String validity,
-                               @RequestParam Integer qtt,
-                               @RequestParam String value) {
+                         @RequestParam String name,
+                         @RequestParam String validity,
+                         @RequestParam Integer qtt,
+                         @RequestParam String value) {
         ProductDTO productDTO = ProductDTO.builder()
                 .id(id)
                 .name(name)
