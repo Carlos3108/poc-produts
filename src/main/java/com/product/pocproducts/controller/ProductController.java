@@ -49,6 +49,7 @@ public class ProductController {
     public ProductDTO findByName(@RequestParam String name) {
         return service.findByName(name);
     }
+
     @Operation(summary = "Pesquisa de Produto por ID",
             description = "Pesquisa de Produto por ID",
             tags = {"Pesquisa de Produto por ID"})
@@ -73,7 +74,7 @@ public class ProductController {
                             schema = @Schema(implementation = ProductDTO.class)
                     )})})
     @PostMapping("/create")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductCreateDTO product){
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductCreateDTO product) {
         return service.create(product);
     }
 
@@ -87,8 +88,8 @@ public class ProductController {
                             schema = @Schema(implementation = ProductDTO.class)
                     )})})
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id)  {
-       return ResponseEntity.ok(service.delete(id));
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.delete(id));
     }
 
     @Operation(summary = "Atualizar Produto",
@@ -101,7 +102,7 @@ public class ProductController {
                             schema = @Schema(implementation = ProductDTO.class)
                     )})})
     @PutMapping("/update")
-    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO product){
+    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO product) {
         return ResponseEntity.ok(service.update(product));
     }
 }

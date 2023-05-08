@@ -82,7 +82,7 @@ public class ProductMapper {
     public Product to(ProductCreateDTO productCreateDTO) {
         return Product.builder()
                 .name(productCreateDTO.getName())
-                .validity(formatDate( productCreateDTO.getValidity() ))
+                .validity(formatDate(productCreateDTO.getValidity()))
                 .qtt(productCreateDTO.getQtt())
                 .value(productCreateDTO.getValue())
                 .build();
