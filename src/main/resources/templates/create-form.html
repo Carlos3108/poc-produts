@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+        crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{../css/create.css}">
+  <title>Criação de Produto</title>
+</head>
+<body>
+<h1>
+  Criar Produto
+</h1>
+<div class="formulario">
+  <form method="POST" action="/poc-products/v1/create-th">
+    <fieldset>
+      <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" name="name" class="form-control"
+               placeholder="Nome">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Validade</label>
+        <input type="text" name="validity" class="form-control"
+               placeholder="Validade">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Quantidade</label>
+        <input type="text" name="qtt" class="form-control"
+               placeholder="Quantidade">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Valor</label>
+        <input type="text" name="value" class="form-control"
+               placeholder="Valor">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Criar</button>
+      <a href="/poc-products/v1/home" class="btn btn-danger">Cancelar</a>
+    </fieldset>
+  </form>
+</div>
+</body>
+</html>
