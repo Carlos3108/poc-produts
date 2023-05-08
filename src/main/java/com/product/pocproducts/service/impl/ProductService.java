@@ -44,7 +44,7 @@ public class ProductService implements IProductService {
 
     @Override
     @SneakyThrows
-    public ProductDTO findByName(String name){
+    public ProductDTO findByName(String name) {
         Product product = repository.findByName(name)
                 .orElseThrow(() -> new PocProductException(PocProductError.PRODUCT_NOT_FOUND));
         return mapper.from(product);
@@ -75,7 +75,7 @@ public class ProductService implements IProductService {
     @Transactional
     public ProductDTO update(ProductDTO productDTO) {
         ProductDTO oldProduct = findByID(productDTO.getId());
-        Product product = mapper.fromUpdate(productDTO,oldProduct);
+        Product product = mapper.fromUpdate(productDTO, oldProduct);
         Product productSaved = Optional.of(repository.save(product))
                 .orElseThrow(() -> new PocProductException(PocProductError.ERROR_UPDATE));
         return mapper.from(productSaved);

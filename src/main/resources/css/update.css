@@ -1,9 +1,11 @@
 body {
     padding: 100px;
 }
+
 h1 {
     text-align: center;
 }
+
 .formulario {
     background-color: aliceblue;
     border-radius: 5px;
