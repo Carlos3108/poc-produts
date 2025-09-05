@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ThymeleafController {
     private IProductService iProductService;
-//test
+//teste
     @GetMapping("/home")
     public ModelAndView listAll() {
         ModelAndView modelAndView = new ModelAndView("home");
